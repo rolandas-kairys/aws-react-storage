@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import './Application.css';
 
+import { Storage } from 'aws-amplify';
+
+
 class Application extends Component {
   state = {
     files: []
+  };
+
+  componentDidMount() {
+
+    Storage.list('').then(files => {
+      console.log({ files });
+    });
   };
 
   handleSubmit = event => {
