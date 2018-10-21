@@ -53,7 +53,7 @@ class Application extends Component {
         <section className="Application-images">
 
           {this.state.files.map(file =>
-            <img src={file} key={file} alt="" />
+            <S3Image file={file} />
           )}
 
         </section>
