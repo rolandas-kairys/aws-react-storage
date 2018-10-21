@@ -9,45 +9,56 @@ class Application extends Component {
     files: []
   };
 
-  async componentDidMount() {
 
-    const keys = await Storage.list('');
-    const urls = await Promise.all(keys.map(async file =>
-      await Storage.get(file.key)));
+  class S3Image extends Component {
+  const file = this.props.file;
+  return(
+        <article>
+  <img src={file} key={file} alt='' />
+        </article >
+      );
+    }
 
-    this.setState({ files: urls })
-    console.log(this.state.files);
-  };
 
-  handleSubmit = event => {
-    event.preventDefault();
+async componentDidMount() {
 
-    const file = this.fileInput.files[0];
-    const { name } = file;
+  const keys = await Storage.list('');
+  const urls = await Promise.all(keys.map(async file =>
+    await Storage.get(file.key)));
 
-    console.log(file, name);
-  };
+  this.setState({ files: urls })
+  console.log(this.state.files);
+};
 
-  render() {
-    return (
-      <div className="Application">
-        <form className="NewItem" onSubmit={this.handleSubmit}>
-          <input
-            type="file"
-            ref={input => this.fileInput = input}
-          />
-          <input className="full-width" type="submit" />
-        </form>
-        <section className="Application-images">
+handleSubmit = event => {
+  event.preventDefault();
 
-          {this.state.files.map(file =>
-            <img src={file} key={file} alt="" />
-          )}
+  const file = this.fileInput.files[0];
+  const { name } = file;
 
-        </section>
-      </div>
-    );
-  }
+  console.log(file, name);
+};
+
+render() {
+  return (
+    <div className="Application">
+      <form className="NewItem" onSubmit={this.handleSubmit}>
+        <input
+          type="file"
+          ref={input => this.fileInput = input}
+        />
+        <input className="full-width" type="submit" />
+      </form>
+      <section className="Application-images">
+
+        {this.state.files.map(file =>
+          <img src={file} key={file} alt="" />
+        )}
+
+      </section>
+    </div>
+  );
+}
 }
 
 export default Application;
