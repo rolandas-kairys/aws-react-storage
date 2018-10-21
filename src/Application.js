@@ -4,6 +4,15 @@ import './Application.css';
 import { Storage } from 'aws-amplify';
 
 
+class S3Image extends Component {
+  const file = this.props.file;
+  return(
+    <article>
+  <img src={file} key={file} alt="" />
+    </article >
+  )
+}
+
 class Application extends Component {
   state = {
     files: []
