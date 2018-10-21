@@ -5,7 +5,11 @@ import { Storage } from 'aws-amplify';
 
 
 class S3Image extends Component {
+  state = { src: null };
+
   render() {
+    if (!this.state.src) return null;
+
     const file = this.props.file;
     return (
       <article>
