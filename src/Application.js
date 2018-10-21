@@ -8,12 +8,12 @@ class S3Image extends Component {
   state = { src: null };
 
   render() {
-    if (!this.state.src) return null;
+    const { src } = this.state;
+    if (!src) return null;
 
-    const file = this.props.file;
     return (
       <article>
-        <img src={file} alt="" />
+        <img src={src} alt="" />
       </article >
     );
   }
