@@ -9,7 +9,7 @@ class S3Image extends Component {
     const file = this.props.file;
     return (
       <article>
-        <img src={file} key={file} alt="" />
+        <img src={file} alt="" />
       </article >
     );
   }
@@ -53,7 +53,7 @@ class Application extends Component {
         <section className="Application-images">
 
           {this.state.files.map(file =>
-            <S3Image file={file} />
+            <S3Image file={file} key={file} />
           )}
 
         </section>
