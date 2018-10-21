@@ -9,11 +9,14 @@ class Application extends Component {
     files: []
   };
 
-  componentDidMount() {
+  async componentDidMount() {
 
-    Storage.list('').then(files => {
-      console.log({ files });
-    });
+    const keys = await Storage.list('');
+    const urls = await Promise.all(keys.map(async file =>
+      await Storage.get(file.key)));
+
+    this.setState({ files: urls })
+    console.log(this.state.files);
   };
 
   handleSubmit = event => {
@@ -36,6 +39,10 @@ class Application extends Component {
           <input className="full-width" type="submit" />
         </form>
         <section className="Application-images">
+
+          {this.state.files.map(file =>
+            <img src={file} key={file} alt="" />
+          )}
 
         </section>
       </div>
