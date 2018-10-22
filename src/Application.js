@@ -48,7 +48,10 @@ class Application extends Component {
     const file = this.fileInput.files[0];
     const { name } = file;
 
-    console.log(file, name);
+    Storage.put(name, file).then(response => {
+      console.log('Storage.put response: ', { response });
+      this.setState({ files: [...this.state.files, response] });
+    });
   };
 
   render() {
