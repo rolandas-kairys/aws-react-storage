@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Application.css';
 
+import { withAuthenticator } from 'aws-amplify-react';
+
 import { Storage } from 'aws-amplify';
 
 
@@ -76,4 +78,4 @@ class Application extends Component {
   }
 }
 
-export default Application;
+export default withAuthenticator(Application);
